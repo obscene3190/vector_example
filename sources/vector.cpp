@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-   vector_t::vector_t() {
+    vector_t::vector_t() {
         elements_ = nullptr;
         size_ = 0;
         capacity_ = 0;
@@ -87,5 +87,9 @@
     }
 
     bool operator!=(vector_t const &lhs, vector_t const &rhs) {
-        return true;
-    }
+        bool success = true;
+        if (lhs == rhs) {
+            success = !success;
+        }
+        return success;
+}
