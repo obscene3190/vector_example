@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-    vector_t::vector_t() {
+   vector_t::vector_t() {
         elements_ = nullptr;
         size_ = 0;
         capacity_ = 0;
@@ -58,7 +58,16 @@
         for (int i = 0; i < size_; ++i) {
             reserve[i] = elements_[i];
         }
-
+        delete[] elements_;
+        size_++;
+        elements_ = new int[size_];
+        for (int i = 0; i < size_-2; ++i) {
+            elements_[i] = reserve[i];
+        }
+        elements_[size_-1] = value;
+        if (size_ > capacity_) {
+            capacity_ *=2;
+        }
     }
 
     void vector_t::pop_back() {
