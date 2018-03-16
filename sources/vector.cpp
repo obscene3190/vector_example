@@ -54,19 +54,26 @@
     }
 
     void vector_t::push_back(int value) {
-        int * reserve = new int[size_];
-        for (int i = 0; i < size_; ++i) {
-            reserve[i] = elements_[i];
-        }
-        delete[] elements_;
-        size_++;
-        elements_ = new int[size_];
-        for (int i = 0; i < size_-2; ++i) {
-            elements_[i] = reserve[i];
-        }
-        elements_[size_-1] = value;
-        if (size_ > capacity_) {
-            capacity_ *=2;
+        if (capacity_ == 0) {
+		size_ = 1;
+		capacity_ = 1;
+		elements_ = new int [capacity_];
+		elements_[0] = value;
+        else {
+            int * reserve = new int[size_];
+            for (int i = 0; i < size_; ++i) {
+                reserve[i] = elements_[i];
+            }
+            delete[] elements_;
+            size_++;
+            if ((size_-1)==campacity_) {
+                campacity_*=2;
+            }
+            elements_ = new int[capacity_];
+            for (int i = 0; i < size_-2; ++i) {
+                elements_[i] = reserve[i];
+            }
+            elements_[size_-1] = value;
         }
     }
 
