@@ -67,8 +67,8 @@
             }
             delete[] elements_;
             size_++;
-            if ((size_-1)==campacity_) {
-                campacity_*=2;
+            if ((size_-1)==capacity_) {
+                capacity_*=2;
             }
             elements_ = new int[capacity_];
             for (int i = 0; i < size_-2; ++i) {
@@ -79,11 +79,25 @@
     }
 
     void vector_t::pop_back() {
-        delete elements_[size_-1];
         size_--;
-        if (size_ == capacity_/4) {
-            capacity_ = capacity_/2;
-        }
+	if (size_ == 0){
+		capacity_ = 1;
+	}
+	else {
+		if (size_ * 4 == capacity_) {
+			int * reserve = new int[capacity_];
+			for (size_t i = 0; i < size_; i++) {
+				reserve[i] = elements_[i];
+			}
+			delete[] elements_;
+			capacity_ = capacity_ / 2;
+			elements_ = new int[capacity_];
+			for (size_t i = 0; i < size_; i++) {
+				elements_[i] = reserve[i];
+			}
+			delete[] reserve;
+		}
+	}
     }
 
     int &vector_t::operator[](std::size_t index) {
