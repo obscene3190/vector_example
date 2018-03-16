@@ -5,7 +5,7 @@
 
 vector_t::vector_t()
 {
-	int * elements_ = new int*[];
+	lements_ = nullptr;
 	size_=0;
 	capacity_=0;
 }
@@ -14,7 +14,7 @@ vector_t::vector_t(vector_t const & other)
 {
 	size_ = other.size();
 	capacity_ = other.capacity();
-	int * elements_ = new int*[size];
+	elements_ = new int*[size];
 	for(int i = 0; i < other.size(); ++i) {
 		elements_[i] = other[i];	
 	}
@@ -22,11 +22,26 @@ vector_t::vector_t(vector_t const & other)
 
 vector_t & vector_t::operator =(vector_t const & other)
 {
+	delete[] elements;
+	size_ = other.size();
+	capacity_ = other.capacity();
+	int * elements_ = new int*[size];
+	for(int i = 0; i < other.size(); ++i) {
+		elements_[i] = other[i];	
+	}
 	return *this;
 }
 
 bool vector_t::operator ==(vector_t const & other) const
 {
+	if (!(size_ == other.size())) {
+		return false;
+	}
+	for(int i = 0; i < size ++i) {
+		if (!(elements_[i] == other[i])) {
+			return false;
+		}
+	}
 	return false;
 }
 
