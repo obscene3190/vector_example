@@ -19,13 +19,15 @@
     }
 
     vector_t &vector_t::operator=(vector_t const &other) {
-        delete[] elements_;
-        size_ = other.size_;
-        capacity_ = other.capacity_;
-        int *elements_ = new int [capacity_];
-        for (int i = 0; i < other.size_; ++i) {
-            elements_[i] = other.elements_[i];
-        }
+        if(*this != other) {
+		delete[] elements_;
+        	size_ = other.size_;
+        	capacity_ = other.capacity_;
+        	int *elements_ = new int [capacity_];
+        	for (int i = 0; i < other.size_; ++i) {
+            	elements_[i] = other.elements_[i];
+       		}
+	}
         return *this;
     }
 
@@ -79,23 +81,25 @@
     }
 
     void vector_t::pop_back() {
-        size_--;
-	if (size_ == 0){
-		capacity_ = 1;
-	}
-	else {
-		if (size_ * 4 == capacity_) {
-			int * reserve = new int[capacity_];
-			for (size_t i = 0; i < size_; i++) {
-				reserve[i] = elements_[i];
+        if(size_ != 0) {
+		size_--;
+		if (size_ == 0){
+			capacity_ = 1;
+		}
+		else {
+			if (size_ * 4 == capacity_) {
+				int * reserve = new int[capacity_];
+				for (size_t i = 0; i < size_; i++) {
+					reserve[i] = elements_[i];
+				}
+				delete[] elements_;
+				capacity_ = capacity_ / 2;
+				elements_ = new int[capacity_];
+				for (size_t i = 0; i < size_; i++) {
+					elements_[i] = reserve[i];
+				}
+				delete[] reserve;
 			}
-			delete[] elements_;
-			capacity_ = capacity_ / 2;
-			elements_ = new int[capacity_];
-			for (size_t i = 0; i < size_; i++) {
-				elements_[i] = reserve[i];
-			}
-			delete[] reserve;
 		}
 	}
     }
