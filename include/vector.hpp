@@ -28,7 +28,7 @@ public:
 	if(index >= size_) {
 		throw std::out_of_range("Out of range");
 		}
-	return *this[index];
+	return (*this)[index];
 	}
 };
 
