@@ -153,3 +153,11 @@ template <typename T>
 int vector_t<T>::operator[](std::size_t index) const {
         return elements_[index];
     }
+
+template <typename T>
+T at(std::size_t index) {
+	if(index >= size_) {
+		throw std::out_of_range("Out of range");
+	}
+	return *this[index];
+}
