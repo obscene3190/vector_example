@@ -16,7 +16,7 @@ public:
 	std::size_t size() const;
 	std::size_t capacity() const;
 
-	void push_back(int value);
+	void push_back(T value);
 	void pop_back();
 
 	int & operator [](std::size_t index);
@@ -101,7 +101,7 @@ std::size_t vector_t<T>::capacity() const {
     }
 
 template <typename T>
-void vector_t<T>::push_back(int value) {
+void vector_t<T>::push_back(T value) {
         if (capacity_ == 0) {
 		size_ = 1;
 		capacity_ = 1;
@@ -109,7 +109,7 @@ void vector_t<T>::push_back(int value) {
 		elements_[0] = value;
 	}
         else {
-            int * reserve = new int[size_];
+            int * reserve = new T [size_];
             for (int i = 0; i < size_; ++i) {
                 reserve[i] = elements_[i];
             }
