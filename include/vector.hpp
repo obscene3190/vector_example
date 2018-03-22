@@ -23,6 +23,8 @@ public:
 	int operator [](std::size_t index) const;
 
 	bool operator ==(vector_t const & other) const;
+	
+	T at(std::size_t index);
 };
 
 template <typename T>
