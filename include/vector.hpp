@@ -24,7 +24,12 @@ public:
 
 	bool operator ==(vector_t const & other) const;
 	
-	T at(std::size_t index);
+	T at(std::size_t index) {
+	if(index >= size_) {
+		throw std::out_of_range("Out of range");
+		}
+	return *this[index];
+	}
 };
 
 template <typename T>
@@ -59,7 +64,7 @@ vector_t<T> &vector_t<T>::operator=(vector_t const &other) {
 		delete[] elements_;
         	size_ = other.size_;
         	capacity_ = other.capacity_;
-        	int *elements_ = new T [capacity_];
+        	T *elements_ = new T [capacity_];
         	for (int i = 0; i < other.size_; ++i) {
             	elements_[i] = other.elements_[i];
        		}
@@ -155,11 +160,3 @@ template <typename T>
 int vector_t<T>::operator[](std::size_t index) const {
         return elements_[index];
     }
-
-template <typename T>
-T at(std::size_t index) {
-	if(index >= size_) {
-		throw std::out_of_range("Out of range");
-	}
-	return *this[index];
-}
