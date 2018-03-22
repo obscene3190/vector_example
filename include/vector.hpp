@@ -25,7 +25,8 @@ public:
 	bool operator ==(vector_t const & other) const;
 };
 
-bool operator !=(vector_t const &lhs, vector_t const &rhs) {
+template <typename T>
+bool operator !=(vector_t<T> const &lhs, vector_t<T> const &rhs) {
         bool success = true;
         if (lhs == rhs) {
             success = !success;
