@@ -19,7 +19,7 @@ TEST_CASE("copying vector")
 	REQUIRE( copy == vector );
 }
 
-TEST_CASE("assigning vector")
+TEST_CASE("assigning vector int")
 {
 	vector_t<int> vector1;
 	vector_t<int> vector2;
@@ -31,7 +31,19 @@ TEST_CASE("assigning vector")
 	REQUIRE( vector1 == vector2 );
 }
 
-TEST_CASE("equaling vector")
+TEST_CASE("assigning vector double")
+{
+	vector_t<double> vector1;
+	vector_t<double> vector2;
+
+	vector1.push_back(1.5);
+	vector2.push_back(2.1);
+
+	vector1 = vector2;
+	REQUIRE( vector1 == vector2 );
+}
+
+TEST_CASE("equaling vector int")
 {
 	vector_t<int> vector1;
 	vector_t<int> vector2;
@@ -44,6 +56,21 @@ TEST_CASE("equaling vector")
 	vector1.push_back(2);
 	REQUIRE( vector1 != vector2 );
 }
+
+TEST_CASE("equaling vector double")
+{
+	vector_t<double> vector1;
+	vector_t<double> vector2;
+
+	vector1.push_back(1.5);
+	vector2.push_back(1.5);
+
+	REQUIRE( vector1 == vector2 );
+
+	vector1.push_back(1.6);
+	REQUIRE( vector1 != vector2 );
+}
+
 
 TEST_CASE("indexing vector")
 {
@@ -117,3 +144,13 @@ TEST_CASE("poping elements")
 	REQUIRE( vector.size() == 0 );
 	REQUIRE( vector.capacity() == 1 );
 }
+
+TEST_CASE("out of range vector")
+{
+	vector_t<int> vector;
+	vector.push_back(1);
+	vector.push_back(2);
+	vector.push_back(3);
+	REQUIRE_THROWS_AS(vector.at(4), std::out_of_range);
+}
+	
