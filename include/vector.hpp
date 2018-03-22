@@ -24,7 +24,7 @@ public:
 
 	bool operator ==(vector_t const & other) const;
 	
-	T at(std::size_t index) {
+	T & at(std::size_t index) {
 	if(index >= size_) {
 		throw std::out_of_range("Out of range");
 		}
@@ -109,7 +109,7 @@ void vector_t<T>::push_back(T value) {
 		elements_[0] = value;
 	}
         else {
-            int * reserve = new T [size_];
+            T * reserve = new T [size_];
             for (int i = 0; i < size_; ++i) {
                 reserve[i] = elements_[i];
             }
